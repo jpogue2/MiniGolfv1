@@ -1,16 +1,16 @@
 #include "PiezoSensors.h"
 #include "config.h"
 #include <TimerOne.h>
+#include "GlobalState.h"
+
+int8_t mappedIndexPerReader[NUM_READERS] = {-1};  // Initialize all to -1
+bool uidValid[NUM_READERS] = {false};
 
 const int numPins = 10;
 const int analogPins[numPins] = {A0, A1, A2, A3, A4, A5, A6, A7, A8, A9};
 int thresholds[numPins] = {20, 20, 20, 20, 10, 20, 20, 1000, 1000, 1000};
 bool pressed[numPins] = {false};
 int lastReadings[numPins] = {0};
-
-// Shared UID data
-bool uidValid[NUM_READERS] = {false};
-byte uidPerReader[NUM_READERS][4];
 
 void setupPiezoSensors() {
   for (int i = 0; i < numPins; i++) {
@@ -33,8 +33,14 @@ void readPiezoSensors() {
     if (!pressed[i] && delta > thresholds[i]) {
       pressed[i] = true;
 
-      // Minimal debug: pulse LED on activation
-      digitalWrite(LED_BUILTIN, HIGH);  
+      if (uidValid[i] && mappedIndexPerReader[i] != -1) {
+        int cardID = mappedIndexPerReader[i];
+        int readerID = i;
+        // Do something like: cardID is on readerID
+      }
+    
+      // Optional: debug pulse
+      digitalWrite(LED_BUILTIN, HIGH);
       delayMicroseconds(100);
       digitalWrite(LED_BUILTIN, LOW);
 
