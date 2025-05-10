@@ -1,4 +1,5 @@
 #include "MP3Notes.h"
+#include <Arduino.h>
 
 SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
 

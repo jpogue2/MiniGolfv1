@@ -1,3 +1,5 @@
+#include "BitBangSPI.h"
+#include "MFRC522_BitBang.h"
 #include "UidMap.h"
 
 int mapUidToIndex(const byte *uid) {
@@ -12,4 +14,9 @@ int mapUidToIndex(const byte *uid) {
     if (match) return i;
   }
   return -1;  // Not found
+}
+
+uint8_t readFirmwareVersion(uint8_t ssPin) {
+  setActiveSSPin(ssPin);
+  return readRegister(0x37);  // 0x37 = VersionReg
 }

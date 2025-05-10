@@ -13,3 +13,4 @@ const byte knownUids[8][4] = {
 };
 
 int mapUidToIndex(const byte *uid);
+uint8_t readFirmwareVersion(uint8_t ssPin);
