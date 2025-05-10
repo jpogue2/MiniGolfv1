@@ -34,14 +34,14 @@
 #define PCD_SoftReset    0x0F
 
 static uint8_t activeSSPin = 33;
-const uint8_t SS_PINS[NUM_READERS] = {33, 34, 35, 36, 37, 38, 39};
+const uint8_t SS_PINS[NUM_RFID_READERS] = {34, 35, 36, 37, 38, 39};
 
 void setActiveSSPin(uint8_t ssPin) {
   activeSSPin = ssPin;
 }
 
 void writeRegister(uint8_t reg, uint8_t value) {
-  for (uint8_t j = 0; j < NUM_READERS; j++) {
+  for (uint8_t j = 0; j < NUM_RFID_READERS; j++) {
     digitalWrite(SS_PINS[j], HIGH);
   }
   digitalWrite(activeSSPin, LOW);
@@ -51,7 +51,7 @@ void writeRegister(uint8_t reg, uint8_t value) {
 }
 
 uint8_t readRegister(uint8_t reg) {
-  for (uint8_t j = 0; j < NUM_READERS; j++) {
+  for (uint8_t j = 0; j < NUM_RFID_READERS; j++) {
     digitalWrite(SS_PINS[j], HIGH);
   }
   digitalWrite(activeSSPin, LOW);
@@ -169,7 +169,7 @@ bool readCardUID(byte *uid, byte &uidLength) {
 }
 
 void initializeReader(uint8_t ssPin) {
-  for (uint8_t j = 0; j < NUM_READERS; j++) {
+  for (uint8_t j = 0; j < NUM_RFID_READERS; j++) {
     digitalWrite(SS_PINS[j], HIGH);
   }
   digitalWrite(ssPin, LOW);  // Only after releasing others

@@ -1,6 +1,11 @@
-#pragma once
+#ifndef CONFIG_H
+#define CONFIG_H
 
-#include <Arduino.h>
+#include <stdint.h>
 
-constexpr uint8_t NUM_READERS = 7;
-extern const uint8_t SS_PINS[NUM_READERS];  // declared, not defined
+#define NUM_RFID_READERS 6
+#define NUM_PIEZO_SENSORS 10
+
+extern const uint8_t SS_PINS[NUM_RFID_READERS];  // Declare globally accessible SS pins
+
+#endif
