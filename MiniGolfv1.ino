@@ -5,6 +5,7 @@
 #include "GlobalState.h"
 #include "UidMap.h"
 #include "MP3Notes.h"
+#include "SolenoidControl.h"
 
 #define RST_PIN 48
 
@@ -19,17 +20,16 @@ bool puzzleSolved = false;
 
 uint8_t firmwareVersions[NUM_RFID_READERS] = {0};
 
-char stepToNote[10] = {
-  'D',  // A0
-  'D',  // A1
-  'D',  // A2
-  'E',  // A3
+char stepToNote[9] = {
+  'c',  // A1
+  'B',  // A2
+  'F',  // A3
   'E',  // A4
-  'E',  // A5
-  'D',  // A6
-  'C',  // A7
-  'D',  // A8
-  'E'   // A9
+  'D',  // A5
+  'C',  // A6
+  'D',  // A7
+  'C',  // A8
+  'C'   // A9
 };
 
 void setup() {
@@ -40,6 +40,7 @@ void setup() {
   // Initialize subsystems
   setupPiezoSensors();
   setupMP3();
+  setupSolenoid();
 
   pinMode(RST_PIN, OUTPUT);
   digitalWrite(RST_PIN, HIGH);
@@ -116,20 +117,19 @@ void loop() {
     Serial.print(i);
     Serial.println(",ACTIVATED");
 
-    playNote(stepToNote[i]);
-
     if (i == 0) {
       if (allTagsCorrect && !puzzleSolved) {
         Serial.println("SOLENOID_TRIGGER");
         puzzleSolved = true;
-
-        // TODO: trigger solenoid, light, etc.
+        playNote('V');
+        triggerSolenoid();
       } else {
         Serial.println("A0_IGNORED");  // Conditions not met
       }
     }
     else if (i >= 1 && i <= 6) {
       int readerIndex = i - 1;
+      playNote(stepToNote[mappedIndexPerReader[readerIndex]-1]);
       if (uidValid[readerIndex] && mappedIndexPerReader[readerIndex] != -1) {
         Serial.print("A");
         Serial.println(mappedIndexPerReader[readerIndex]);
@@ -138,12 +138,16 @@ void loop() {
       }
     }
     else {
+      playNote(stepToNote[i-1]);
       Serial.print("A");
       Serial.println(i);
     }
 
     justPressed[i] = false;
   }
+
+  // ------- Solenoid Activation -------
+  updateSolenoid();
 
   // --------- Version Polling ---------
   // if (millis() - lastVersionCheckTime >= VERSION_POLL_INTERVAL) {

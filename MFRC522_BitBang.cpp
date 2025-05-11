@@ -33,7 +33,7 @@
 #define PCD_Transceive   0x0C
 #define PCD_SoftReset    0x0F
 
-static uint8_t activeSSPin = 33;
+static uint8_t activeSSPin = 34;
 const uint8_t SS_PINS[NUM_RFID_READERS] = {34, 35, 36, 37, 38, 39};
 
 void setActiveSSPin(uint8_t ssPin) {

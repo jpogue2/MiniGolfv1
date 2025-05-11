@@ -19,40 +19,27 @@ void mp3_command(int8_t command, int16_t dat) {
   }
 }
 
-// Note indices must match MP3 file numbers on SD card
-void playC()  { mp3_command(CMD_PLAY_W_INDEX, 2); }
-void playCs() { mp3_command(CMD_PLAY_W_INDEX, 3); }
-void playD()  { mp3_command(CMD_PLAY_W_INDEX, 4); }
-void playDs() { mp3_command(CMD_PLAY_W_INDEX, 6); }
-void playE()  { mp3_command(CMD_PLAY_W_INDEX, 7); }
-void playF()  { mp3_command(CMD_PLAY_W_INDEX, 8); }
-void playFs() { mp3_command(CMD_PLAY_W_INDEX, 9); }
-void playG()  { mp3_command(CMD_PLAY_W_INDEX, 10); }
-void playGs() { mp3_command(CMD_PLAY_W_INDEX, 11); }
-void playA()  { mp3_command(CMD_PLAY_W_INDEX, 12); }
-void playAs() { mp3_command(CMD_PLAY_W_INDEX, 5); }
-void playB()  { mp3_command(CMD_PLAY_W_INDEX, 1); }
+// Individual note functions
+void playC1()     { mp3_command(CMD_PLAY_W_INDEX, 1); Serial.println("C"); }
+void playD()      { mp3_command(CMD_PLAY_W_INDEX, 2); Serial.println("D"); }
+void playE()      { mp3_command(CMD_PLAY_W_INDEX, 3); Serial.println("E"); }
+void playF()      { mp3_command(CMD_PLAY_W_INDEX, 4); Serial.println("F"); }
+void playB()      { mp3_command(CMD_PLAY_W_INDEX, 5); Serial.println("B"); }
+void playC2()     { mp3_command(CMD_PLAY_W_INDEX, 6); Serial.println("High C"); }
+void playVictory(){ mp3_command(CMD_PLAY_W_INDEX, 7); Serial.println("Victory"); }
+void playBad()    { mp3_command(CMD_PLAY_W_INDEX, 8); Serial.println("Bad"); }
 
 void playNote(char note) {
   switch (note) {
-    case 'C': playC();  break;
-    case 'c': playCs(); break;
-
+    case 'C': playC1(); break;   // Low C
     case 'D': playD();  break;
-    case 'd': playDs(); break;
-
     case 'E': playE();  break;
-
     case 'F': playF();  break;
-    case 'f': playFs(); break;
-
-    case 'G': playG();  break;
-    case 'g': playGs(); break;
-
-    case 'A': playA();  break;
-    case 'a': playAs(); break;
-
     case 'B': playB();  break;
+    case 'c': playC2(); break;   // High C
+
+    case 'V': playVictory(); break;  // Victory sound
+    case 'X': playBad();     break;  // Bad sound
 
     default:
       Serial.print("Unknown note: ");
