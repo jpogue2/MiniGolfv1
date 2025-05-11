@@ -129,7 +129,11 @@ void loop() {
     }
     else if (i >= 1 && i <= 6) {
       int readerIndex = i - 1;
-      playNote(stepToNote[mappedIndexPerReader[readerIndex]-1]);
+      if (mappedIndexPerReader[readerIndex]-1 == readerIndex) {
+        playNote(stepToNote[readerIndex]);
+      } else {
+        playNote('X');
+      }
       if (uidValid[readerIndex] && mappedIndexPerReader[readerIndex] != -1) {
         Serial.print("A");
         Serial.println(mappedIndexPerReader[readerIndex]);

@@ -1,4 +1,5 @@
 #include "SolenoidControl.h"
+#include "GlobalState.h"
 
 const int solenoidPin = 25;
 const int buttonPin = 24;
@@ -28,6 +29,7 @@ void updateSolenoid() {
       if (stableButtonState == LOW) {
         solenoidOn = !solenoidOn;
         digitalWrite(solenoidPin, solenoidOn ? HIGH : LOW);
+        puzzleSolved = false;
       }
     }
   }

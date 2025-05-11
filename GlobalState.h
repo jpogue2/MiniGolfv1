@@ -6,5 +6,6 @@
 
 extern int8_t mappedIndexPerReader[NUM_RFID_READERS];
 extern bool uidValid[NUM_RFID_READERS];
+extern bool puzzleSolved;
 
 #endif
