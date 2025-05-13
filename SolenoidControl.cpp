@@ -1,5 +1,6 @@
 #include "SolenoidControl.h"
 #include "GlobalState.h"
+#include "PiezoSensors.h"
 
 const int solenoidPin = 25;
 const int buttonPin = 24;
@@ -30,7 +31,10 @@ void updateSolenoid() {
         solenoidOn = !solenoidOn;
         digitalWrite(solenoidPin, solenoidOn ? HIGH : LOW);
         puzzleSolved = false;
+        allTagsCorrect = false;
         delay(2000);
+        justPressed[0] = false;
+        justPressed[1] = false;
       }
     }
   }

@@ -15,9 +15,6 @@ const unsigned long RFID_SCAN_INTERVAL = 2000;
 unsigned long lastVersionCheckTime = 0;
 const unsigned long VERSION_POLL_INTERVAL = 10000;  // 10 seconds
 
-bool allTagsCorrect = false;
-bool puzzleSolved = false;
-
 uint8_t firmwareVersions[NUM_RFID_READERS] = {0};
 
 char stepToNote[9] = {
@@ -64,7 +61,7 @@ void setup() {
 
 void loop() {
   // --------- RFID Scanning ---------
-  if (millis() - lastRFIDScanTime >= RFID_SCAN_INTERVAL) {
+  if (millis() - lastRFIDScanTime >= RFID_SCAN_INTERVAL && !allTagsCorrect) {
     allTagsCorrect = true;
 
     for (uint8_t i = 0; i < NUM_RFID_READERS; i++) {
