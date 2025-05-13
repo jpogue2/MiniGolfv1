@@ -20,14 +20,23 @@ void mp3_command(int8_t command, int16_t dat) {
 }
 
 // Individual note functions
-void playC1()     { mp3_command(CMD_PLAY_W_INDEX, 1); Serial.println("C"); }
-void playD()      { mp3_command(CMD_PLAY_W_INDEX, 2); Serial.println("D"); }
-void playE()      { mp3_command(CMD_PLAY_W_INDEX, 3); Serial.println("E"); }
-void playF()      { mp3_command(CMD_PLAY_W_INDEX, 4); Serial.println("F"); }
-void playB()      { mp3_command(CMD_PLAY_W_INDEX, 5); Serial.println("B"); }
-void playC2()     { mp3_command(CMD_PLAY_W_INDEX, 6); Serial.println("High C"); }
-void playVictory(){ mp3_command(CMD_PLAY_W_INDEX, 7); Serial.println("Victory"); }
-void playBad()    { mp3_command(CMD_PLAY_W_INDEX, 8); Serial.println("Bad"); }
+// void playC1()     { mp3_command(CMD_PLAY_W_INDEX, 1); Serial.println("C"); }
+// void playD()      { mp3_command(CMD_PLAY_W_INDEX, 2); Serial.println("D"); }
+// void playE()      { mp3_command(CMD_PLAY_W_INDEX, 3); Serial.println("E"); }
+// void playF()      { mp3_command(CMD_PLAY_W_INDEX, 4); Serial.println("F"); }
+// void playB()      { mp3_command(CMD_PLAY_W_INDEX, 5); Serial.println("B"); }
+// void playC2()     { mp3_command(CMD_PLAY_W_INDEX, 6); Serial.println("c"); }
+// void playVictory(){ mp3_command(CMD_PLAY_W_INDEX, 7); Serial.println("V"); }
+// void playBad()    { mp3_command(CMD_PLAY_W_INDEX, 8); Serial.println("X"); }
+
+void playC1()     { Serial.println("C"); }
+void playD()      { Serial.println("D"); }
+void playE()      { Serial.println("E"); }
+void playF()      { Serial.println("F"); }
+void playB()      { Serial.println("B"); }
+void playC2()     { Serial.println("c"); }
+void playVictory(){ Serial.println("V"); }
+void playBad()    { Serial.println("X"); }
 
 void playNote(char note) {
   switch (note) {

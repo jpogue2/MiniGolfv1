@@ -30,6 +30,7 @@ void updateSolenoid() {
         solenoidOn = !solenoidOn;
         digitalWrite(solenoidPin, solenoidOn ? HIGH : LOW);
         puzzleSolved = false;
+        delay(2000);
       }
     }
   }
